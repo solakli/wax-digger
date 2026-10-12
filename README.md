@@ -1,7 +1,7 @@
 # Wax Digger
 
-Search 12 record stores at once, see what from your wantlist is in stock, and buy it for
-the cheapest total price including shipping. Live at [waxdigger.ai](https://waxdigger.ai).
+See what from your Discogs wantlist is for sale, and buy it for the cheapest total price
+including shipping. Live at [waxdigger.ai](https://waxdigger.ai).
 
 This is a write-up. The source is private. UI design and the May 2026 rebrand are by Dan.
 
@@ -12,8 +12,8 @@ might be in stock at seven different places at seven different prices, and every
 charges shipping once per order. Buying five records from five stores costs five shipping
 fees. The cheapest individual prices almost never produce the cheapest total.
 
-Nobody solves this by hand across 12 stores and a 200-item wantlist, so people overpay
-or give up and buy from one shop.
+Nobody solves this by hand across dozens of sellers and a 200-item wantlist, so people
+overpay or give up and buy from one shop.
 
 ## The interesting part: the cart optimizer
 
@@ -64,10 +64,12 @@ a recommendation, and one scoring 80 that everyone owns is not.
 
 ## The rest of the system
 
-**Wantlist scanning.** Discogs OAuth, then every wantlist item is checked against every
-store with live progress. EU stores are scraped per item with Puppeteer. US stores are
-mirrored locally instead, roughly 37,000 items across Shopify and WooCommerce catalogs,
-which makes those lookups instant and avoids hammering anyone's site.
+**Wantlist scanning.** Discogs OAuth, then every wantlist item is checked against the
+Discogs marketplace with live progress. The first version also checked 12 record stores:
+EU stores scraped per item with Puppeteer, US stores mirrored locally (roughly 37,000 items
+across Shopify and WooCommerce catalogs). Store scanning has been off by default since
+September 2026, so the live product works from Discogs sellers, where the same
+once-per-order shipping problem applies.
 
 **Mix to Cart.** Paste a SoundCloud, YouTube, or Mixcloud link and it recovers the
 tracklist from the description, then the comments, then audio fingerprinting if both fail,
